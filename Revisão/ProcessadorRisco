@@ -1,0 +1,52 @@
+public class ProcessadorRisco {
+    public static void main(String[] args) {
+        int[] notasRisco = {15, 25, 85, 92, 18, 45, 55, 32, 95, 72, 20, 38, 88, 65, 42};
+        
+        int somaWeighted = 0;
+        int totalPesos = 0;
+        
+       
+        for (int i = 0; i < notasRisco.length; i++) {
+            int peso;
+            if (i <= 4) {
+                peso = 3; 
+            } else {
+                peso = 1; 
+            }
+            somaWeighted += notasRisco[i] * peso;
+            totalPesos += peso;
+        }
+        
+        double mediaPonderada = (double) somaWeighted / totalPesos;
+        
+        int otimistas = 0;
+        int alarmantes = 0;
+        
+        for (int nota : notasRisco) {
+            if (nota <= 20) {
+                otimistas++;
+            }
+            if (nota >= 90) {
+                alarmantes++;
+            }
+        }
+        
+        String parecer;
+        if (mediaPonderada > 70) {
+            parecer = "Alto Risco: Venda ou reajuste de portfólio recomendado.";
+        } else if (mediaPonderada >= 40 && mediaPonderada <= 70) {
+            parecer = "Risco Moderado: Acompanhar de perto, mas manter os ativos.";
+        } else {
+            parecer = "Baixo Risco: Excelente momento para capitalização.";
+        }
+        
+        System.out.println("------------------------------------------");
+        System.out.println("Processamento da Análise de Risco:");
+        System.out.println("------------------------------------------");
+        System.out.printf("Média Ponderada do Risco: %.2f%n", mediaPonderada);
+        System.out.println("Analistas Otimistas (Nota <= 20): " + otimistas);
+        System.out.println("Analistas Alarmantes (Nota >= 90): " + alarmantes);
+        System.out.println("------------------------------------------");
+        System.out.println("Parecer Final: " + parecer);
+    }
+}
